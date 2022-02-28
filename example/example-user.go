@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/sanran4/go-sandb/db"
 )
 
@@ -52,10 +53,12 @@ func main() {
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
+
+	// Print record in json format (directly from database)
 	fmt.Println(records)
 
+	// Print record in struct format
 	allusers := []User{}
-
 	for _, f := range records {
 		empFound := User{}
 		if err := json.Unmarshal([]byte(f), &empFound); err != nil {
@@ -65,10 +68,12 @@ func main() {
 	}
 	fmt.Println(allusers)
 
+	//// Delete spesific user from "users" collection
 	// if err := db.Delete("users", "Ranjan"); err != nil {
 	// 	fmt.Println("Error:", err)
 	// }
 
+	//// Delete "users" collection
 	// if err := db.Delete("users", ""); err != nil {
 	// 	fmt.Println("Error:", err)
 	// }
